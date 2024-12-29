@@ -7,7 +7,7 @@ import lines2 from "../lib/animated_backgrounds/lines2";
 import grids from "../lib/animated_backgrounds/grids";
 import boids from "../lib/animated_backgrounds/boids";
 // import dots from "../lib/animated_backgrounds/dots";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Runner } from "@/lib/animated_backgrounds/interface";
 import is_mobile from "@/lib/is_mobile";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -25,29 +25,26 @@ const ART: [Runner, string][] = [
 ]
 
 export default function DisplayArt({ className }: { className?: string }) {
-    let [artpiece, setArtpiece] = useState(0);
-    let [shuffleOn, setShuffleOn] = useState(true);
-    let name = useMemo(() => ART[artpiece][1], [artpiece]);
-    let func = useMemo(() => ART[artpiece][0], [artpiece]);
+    const [artpiece, setArtpiece] = useState(0);
+    const [shuffleOn, setShuffleOn] = useState(true);
+    const name = useMemo(() => ART[artpiece][1], [artpiece]);
+    const func = useMemo(() => ART[artpiece][0], [artpiece]);
 
     const duration = 10000;
 
     const left = () => {
         setArtpiece(a => (a - 1 + ART.length) % ART.length);
     };
-    const right = () => {
+    const right = useCallback(() => {
         setArtpiece(a => (a + 1) % ART.length);
-    };
-    const shuffle = () => {
-        right();
-    };
+    }, []);
 
     useEffect(() => {
         if (shuffleOn) {
-            const timeout = setInterval(shuffle, duration);
+            const timeout = setInterval(right, duration);
             return () => { clearInterval(timeout) };
         }
-    }, [shuffleOn]);
+    }, [shuffleOn, right]);
 
     return <>
         <Canvas
@@ -70,22 +67,22 @@ export default function DisplayArt({ className }: { className?: string }) {
     </>
 }
 
-function runArt(CAN: HTMLCanvasElement, { func, duration }: { func: Runner, duration: number }) {
+function runArt(CAN: HTMLCanvasElement, { func }: { func: Runner }) {
     type EventBundle = { t: string, cb: EventListener, opt?: AddEventListenerOptions };
-    let eventListenerCleanup: EventBundle[] = [];
+    const eventListenerCleanup: EventBundle[] = [];
     const safeAddEventListener = (t: string, cb: EventListener, opt?: AddEventListenerOptions) => {
         eventListenerCleanup.push({ t, cb, opt });
         window.addEventListener(t, cb, opt);
     };
     const cleanupEventListeners = () => {
-        for (let { t, cb, opt } of eventListenerCleanup) {
+        for (const { t, cb, opt } of eventListenerCleanup) {
             window.removeEventListener(t, cb, opt);
         }
     };
 
     const is_phone = is_mobile();
 
-    const start = Date.now();
+    // const start = Date.now();
     // const transition_duration = 400;
     // const transition = () => Math.max(Date.now() - start - duration + transition_duration, 0) / transition_duration;
 

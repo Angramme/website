@@ -1,6 +1,6 @@
 import { createNoise3D } from 'simplex-noise';
 
-export default function lines2({canvas, is_phone, safeAddEventListener, darkmode, getwinsize, isVisible, transition}){
+export default function lines2({canvas, safeAddEventListener, darkmode, getwinsize, isVisible, transition}){
     const render_scale = .8;
     const can = canvas;
     const ctx = can.getContext("2d");

@@ -20,7 +20,7 @@ class Dancer{
 }
 
 function circle(color){
-    return (ctx, x, y, scale, rot)=>{
+    return (ctx, x, y, scale)=>{
         ctx.strokeStyle = color;
         ctx.beginPath();
         ctx.arc(x, y, scale*20, 0, 2 * Math.PI);
@@ -56,7 +56,7 @@ function randcolor(darmode){
     return darmode ? "white" : "black";
 }
 
-export default function dancing_shapes({canvas, is_phone, safeAddEventListener, darkmode, getwinsize, isVisible, transition}){
+export default function dancing_shapes({canvas, safeAddEventListener, darkmode, getwinsize, isVisible, transition}){
     const render_scale = .8;
     const can = canvas;
     const ctx = can.getContext("2d");

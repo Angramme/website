@@ -11,9 +11,6 @@ function nearest_rect(x, y, w, h){
     }
 }
 
-function dist(x, y, u, v){
-    return Math.sqrt((x-u)*(x-u) + (y-v)*(y-v));
-}
 function distsq(x, y, u, v){
     return (x-u)*(x-u) + (y-v)*(y-v);
 }
@@ -76,7 +73,7 @@ class Boid{
     // }
 }
 
-export default function boids({canvas, is_phone, safeAddEventListener, darkmode, getwinsize, isVisible}){
+export default function boids({canvas, safeAddEventListener, darkmode, getwinsize, isVisible}){
     const render_scale = .8;
     const can = canvas;
     const ctx = can.getContext("2d");

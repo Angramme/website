@@ -36,7 +36,7 @@ function pattern(ctx, noise, x, y, s, n, T){
     }
 }
 
-export default function grids({canvas, is_phone, safeAddEventListener, darkmode, getwinsize, isVisible, transition}){
+export default function grids({canvas, safeAddEventListener, darkmode, getwinsize, isVisible, transition}){
     const render_scale = .8;
     const can = canvas;
     const ctx = can.getContext("2d");
