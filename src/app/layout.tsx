@@ -28,9 +28,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <footer className="z-[-1] p-2 text-sm text-center text-[var(--foreground)]">
-          Copyright © {new Date().getFullYear()} Kacper Ozieblowski
-        </footer>
       </body>
     </html>
   );
