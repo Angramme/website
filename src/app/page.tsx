@@ -1,55 +1,79 @@
 import Image from "next/image";
+import Block from "@/comp/block";
+import mePic from "../../public/me.jpg";
+import cvPic from "../../public/cv.png";
+import GitHubIcon from '@mui/icons-material/GitHub';
+import Llink from "@/comp/link";
+import Link from "next/link";
+import DisplayArt from "@/comp/DisplayArt";
+import { EmailShower } from "@/comp/sensitive";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div className="grid grid-rows-[1fr] items-center justify-items-center min-h-screen p-4 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <DisplayArt
+        className="fixed top-0 left-0 w-screen h-screen z-[-2] opacity-30 invisible sm:visible"
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      <main className="flex flex-col gap-4 items-start">
+        <Block>
+          <h1 className="text-4xl text-left font-[family-name:var(--font-geist-sans)]">
+            Kacper Ozieblowski ✈️
+          </h1>
+        </Block>
+        <div className="flex gap-4 max-w-lg items-start">
+          <div className="flex w-full h-full flex-col gap-4 items-stretch">
+            <Link href={'https://docs.google.com/viewer?url=https://github.com/Angramme/cv/raw/refs/heads/main/CV_OZIEBLOWSKI.pdf'} target="_blank">
+              <Block nopad>
+                <div className="rounded-lg grayscale aspect-square overflow-hidden">
+                  <Image
+                    className="object-cover hover:colo"
+                    src={cvPic}
+                    alt="cv"
+                    />
+                </div>
+                <div className="p-4 opacity-60">
+                  Curriculum Vitae
+                </div>
+              </Block>
+            </Link>
+            {/* </Block> */}
+            <Block heading="Projects">
+              <Link href='https://github.com/Angramme' target="_blank" className="hover:text-[var(--accent)]"><GitHubIcon/></Link> <br />
+              <br />
+              Highligts: <br />
+              <Llink href='https://fractal.ozieblowski.dev/' target="_blank">fractal</Llink> <br />
+              <Llink href='https://poly.ozieblowski.dev/' target="_blank">polyrhythm</Llink> <br />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            </Block>
+            <Block heading="Creative Coding">
+              <Llink href='https://www.shadertoy.com/user/Angramme' target="_blank">ShaderToy </Llink><br />
+              <Llink href='https://shaderpark.com/user/angramme' target="_blank">ShaderPark </Llink><br />
+              <Llink href='https://editor.p5js.org/kaoz/collections/BWUPOdDZq' target="_blank">p5.js </Llink><br />
+              this background <br />
+            </Block>
+          </div>
+          <div className="flex w-full h-full flex-col gap-4 items-stretch">
+            <Block nopad>
+              <div className="p-4 opacity-60">
+                  My face
+                </div>
+              <Image className="rounded-lg grayscale aspect-[4/5] object-cover" src={mePic} alt={"me"} />
+            </Block>
+            <Block heading="Contact">
+              <Llink href='https://www.linkedin.com/in/kacper-ozieblowski/' target="_blank">LinkedIn</Llink> <br />
+              <EmailShower/> <br />
+              <Llink href='abc' target="_blank">X</Llink> <br />
+            </Block>
+            {/* <Block heading="Blog">
+              <Llink href='abc' target="_blank">Medium</Llink>
+            </Block> */}
+            <Block heading="Music">
+              <Llink href='abc' target="_blank">SoundCloud</Llink>
+            </Block>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+      {/* <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -95,7 +119,7 @@ export default function Home() {
           />
           Go to nextjs.org →
         </a>
-      </footer>
+      </footer> */}
     </div>
   );
 }
