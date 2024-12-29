@@ -7,7 +7,7 @@ import lines2 from "../lib/animated_backgrounds/lines2";
 import grids from "../lib/animated_backgrounds/grids";
 import boids from "../lib/animated_backgrounds/boids";
 // import dots from "../lib/animated_backgrounds/dots";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Runner } from "@/lib/animated_backgrounds/interface";
 import is_mobile from "@/lib/is_mobile";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -24,11 +24,12 @@ const ART: [Runner, string][] = [
     //[dots, "dots"],
 ]
 
-export default function DisplayArt({ className }: { className?: string }) {
+export default function DisplayArt() {
     const [artpiece, setArtpiece] = useState(0);
     const [shuffleOn, setShuffleOn] = useState(true);
     const name = useMemo(() => ART[artpiece][1], [artpiece]);
     const func = useMemo(() => ART[artpiece][0], [artpiece]);
+    const ref = useRef<HTMLCanvasElement>(null);
 
     const duration = 10000;
 
@@ -46,11 +47,24 @@ export default function DisplayArt({ className }: { className?: string }) {
         }
     }, [shuffleOn, right]);
 
+    useEffect(()=>{
+        const from = 30, to = 0;
+        const handle = () => {
+            const x = 2* window.scrollY / window.innerHeight;
+            const opacity = from * (1 - x) + to * x;
+            if (ref.current) 
+                ref.current.style.opacity = `${opacity}%`;
+        };
+        addEventListener("scroll", handle);
+        return () => removeEventListener("scroll", handle);
+    }, [ref]);
+
     return <>
         <Canvas
             script={runArt}
             args={{ func, duration }}
-            className={className} />
+            ref={ref}
+            className="opacity-30 fixed top-0 left-0 w-screen h-screen z-[-2] invisible sm:visible" />
         <div
             className="fixed bottom-0 right-0 p-10 underline invisible sm:visible text-right"
         >
@@ -98,7 +112,7 @@ function runArt(CAN: HTMLCanvasElement, { func }: { func: Runner }) {
             ];
         },
         isVisible: () => window.scrollY / window.innerHeight * 2.0 < 1.,
-        transition: () => 0,
+        transition: () => window.scrollY / window.innerHeight * 2.0,
     });
 
     return function cleanup() {
