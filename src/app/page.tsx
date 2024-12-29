@@ -11,7 +11,7 @@ import Scroll from "@/comp/scroll";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[1fr] items-center justify-items-center min-h-screen p-4 font-[family-name:var(--font-geist-sans)]">
+    <div className="flex flex-col items-center justify-items-center min-h-screen p-4 font-[family-name:var(--font-geist-sans)]">
       <Scroll/>
       <DisplayArt/>
       <main className="flex flex-col gap-4 items-start sm:mb-20">

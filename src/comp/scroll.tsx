@@ -14,7 +14,7 @@ export default function Scroll() {
         addEventListener("scroll", handle);
         return () => removeEventListener("scroll", handle);
     }, [ref]);
-    return <div ref={ref} className="w-screen h-screen text-center flex items-end justify-center pb-4 text-lg">
+    return <div ref={ref} className="w-screen h-screen text-center hidden items-end justify-center pb-4 text-lg sm:flex">
         scroll down
     </div>;
 }
