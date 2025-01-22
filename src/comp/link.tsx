@@ -7,7 +7,7 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 function Inner({ children, disabled }: Readonly<{ children: React.ReactNode, disabled?: boolean }>) {
     return (
         <>
-            <ArrowOutwardIcon className={`text-[var(${disabled ? '--foreground' : '--accent'})] group-hover:text-[var(--foreground)]`} />
+            <ArrowOutwardIcon className={`text-[var(--accent)] ${disabled ? 'text-[var(--foreground)]' : ''} group-hover:text-[var(--foreground)]`} />
             <span className='bg-black/5 dark:bg-white/5'>
                 {children}
             </span>
