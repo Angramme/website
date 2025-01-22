@@ -12,8 +12,9 @@ import { Runner } from "@/lib/animated_backgrounds/interface";
 import is_mobile from "@/lib/is_mobile";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
 import ReplayIcon from '@mui/icons-material/Replay';
+import Tooltip from '@mui/material/Tooltip';
 
 const ART: [Runner, string][] = [
     [dancing_shapes, "dancing shapes"],
@@ -47,12 +48,12 @@ export default function DisplayArt() {
         }
     }, [shuffleOn, right]);
 
-    useEffect(()=>{
+    useEffect(() => {
         const from = 30, to = 0;
         const handle = () => {
-            const x = 2* window.scrollY / window.innerHeight;
+            const x = 2 * window.scrollY / window.innerHeight;
             const opacity = from * (1 - x) + to * x;
-            if (ref.current) 
+            if (ref.current)
                 ref.current.style.opacity = `${opacity}%`;
         };
         addEventListener("scroll", handle);
@@ -68,13 +69,19 @@ export default function DisplayArt() {
         <div
             className="fixed bottom-0 right-0 p-10 underline invisible sm:visible text-right"
         >
-            <span onClick={() => setShuffleOn(x => !x)}>
-                {
-                    shuffleOn ? <ReplayIcon /> : <PlayArrowIcon />
-                }
-            </span>
-            <ChevronLeftIcon onClick={left} />
-            <ChevronRightIcon onClick={right} />
+            <Tooltip title={shuffleOn ? "shuffling - click to pause" : "paused - click to resume shuffling"}>
+                <span onClick={() => setShuffleOn(x => !x)}>
+                    {
+                        shuffleOn ? <ReplayIcon /> : <PauseIcon />
+                    }
+                </span>
+            </Tooltip>
+            <Tooltip title="previous animation">
+                <ChevronLeftIcon onClick={left} />
+            </Tooltip>
+            <Tooltip title="next animation">
+                <ChevronRightIcon onClick={right} />
+            </Tooltip>
             <br />
             {name}
         </div>

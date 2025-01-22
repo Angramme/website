@@ -4,7 +4,7 @@
 export default function Block({ children, heading, nopad }: Readonly<{ heading?: string, children: React.ReactNode; nopad?: boolean }>) {
 
     return (
-        <div className="rounded-lg flex-grow h-full w-full bg-[var(--background)] shadow-2xl border border-black/20 dark:border-white/20 dark:shadow-white/10">
+        <div className="rounded-lg flex-grow h-full w-full bg-[var(--background)] shadow-2xl border border-black/10 dark:border-white/10 dark:shadow-white/15">
 
             {
                 !heading ? null :
