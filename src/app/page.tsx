@@ -56,8 +56,8 @@ export default function Home() {
                 <Llink href='https://www.shadertoy.com/user/Angramme' target="_blank">ShaderToy </Llink><br />
                 <Llink href='https://shaderpark.com/user/angramme' target="_blank">ShaderPark </Llink><br />
                 <Llink href='https://editor.p5js.org/kaoz/collections/BWUPOdDZq' target="_blank">p5.js </Llink><br />
-                <span className="opacity-60 hidden sm:inline">
-                  (this background)
+                <span className="hidden sm:inline italic">
+                  <Llink disabled>this background</Llink>
                 </span>
                 <br />
               </Block>

@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
-export default function Llink({ href, onClick, target, children }: Readonly<{ onClick?: () => void, href?: string, children: React.ReactNode, target?: string }>) {    
+export default function Llink({ href, onClick, target, children, disabled }: Readonly<{ onClick?: () => void, href?: string, children: React.ReactNode, target?: string, disabled?: boolean}>) {    
     if(href && onClick) throw new Error('Llink: cannot have both href and onClick');
     const inside = <>
-        <ArrowOutwardIcon className='text-[var(--accent)] group-hover:text-[var(--foreground)]' />
+        <ArrowOutwardIcon className={`text-[var(${disabled ? '--foreground' : '--accent'})] group-hover:text-[var(--foreground)]`} />
             <span className='bg-black/5 dark:bg-white/5'>
                 {children}
             </span>
@@ -17,14 +17,14 @@ export default function Llink({ href, onClick, target, children }: Readonly<{ on
             href={href}
             onClick={onClick}
             target={target}
-            className='hover:bg-[var(--accent)] group'
+            className={`group ${disabled ? 'opacity-60' : 'hover:bg-[var(--accent)]'}`}
         >
             {inside}
         </Link>
         :
         <span
             onClick={onClick}
-            className='hover:bg-[var(--accent)] group'
+            className={`group ${disabled ? 'opacity-60' : 'hover:bg-[var(--accent)]'}`}
         >
             {inside}
         </span>
