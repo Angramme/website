@@ -9,20 +9,26 @@ import DisplayArt from "@/comp/DisplayArt";
 import { EmailShower } from "@/comp/sensitive";
 import Scroll from "@/comp/scroll";
 
+function Col({ children }: { children: React.ReactNode }) {
+  return <div className="flex w-full h-full flex-col gap-20 sm:gap-4 items-stretch">
+    {children}
+  </div>;
+}
+
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-items-center min-h-screen p-4 font-[family-name:var(--font-geist-sans)]">
+    <main className="flex flex-col items-center justify-items-center min-h-screen p-3 sm:p-4 font-[family-name:var(--font-geist-sans)]">
       <Scroll />
       <DisplayArt />
       <div className="min-h-screen flex flex-col justify-center">
         <div className="flex flex-col gap-4 items-start">
           <Block>
             <h1 className="text-3xl text-left font-[family-name:var(--font-geist-sans)]">
-              🚀 Kacper Ozieblowski 
+              🚀 Kacper Ozieblowski
             </h1>
           </Block>
           <div className="flex gap-4 max-w-lg items-start">
-            <div className="flex w-full h-full flex-col gap-4 items-stretch">
+            <Col>
               <Link href={'https://docs.google.com/viewer?url=https://github.com/Angramme/cv/raw/refs/heads/main/CV_OZIEBLOWSKI.pdf'} target="_blank">
                 <Block nopad>
                   <div className="rounded-lg grayscale aspect-square overflow-hidden">
@@ -50,13 +56,13 @@ export default function Home() {
                 <Llink href='https://www.shadertoy.com/user/Angramme' target="_blank">ShaderToy </Llink><br />
                 <Llink href='https://shaderpark.com/user/angramme' target="_blank">ShaderPark </Llink><br />
                 <Llink href='https://editor.p5js.org/kaoz/collections/BWUPOdDZq' target="_blank">p5.js </Llink><br />
-                <span className="opacity-60">
+                <span className="opacity-60 hidden sm:inline">
                   (this background)
                 </span>
                 <br />
               </Block>
-            </div>
-            <div className="flex w-full h-full flex-col gap-4 items-stretch">
+            </Col>
+            <Col>
               <Block nopad>
                 <div className="p-4 opacity-60">
                   My face
@@ -75,7 +81,7 @@ export default function Home() {
                 {/* <Llink href='abc' target="_blank">SoundCloud</Llink> */}
                 Hidden for now...
               </Block>
-            </div>
+            </Col>
           </div>
         </div>
       </div>
