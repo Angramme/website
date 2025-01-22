@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Kacper Ozieblowski Website",
   description: "Personal website of Kacper Ozieblowski",
+  icons: [
+    "/favicon.png",
+  ]
 };
 
 export default function RootLayout({
