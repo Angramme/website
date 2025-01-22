@@ -23,23 +23,12 @@ const ART: [Runner, string][] = [
     [grids, "grids"],
     [boids, "boids"],
     //[dots, "dots"],
-]
+];
 
-export default function DisplayArt() {
-    const [artpiece, setArtpiece] = useState(0);
+const duration = 10000;
+
+function Controls({ left, right, name }: { left: () => void, right: () => void, name: string }) {
     const [shuffleOn, setShuffleOn] = useState(true);
-    const name = useMemo(() => ART[artpiece][1], [artpiece]);
-    const func = useMemo(() => ART[artpiece][0], [artpiece]);
-    const ref = useRef<HTMLCanvasElement>(null);
-
-    const duration = 10000;
-
-    const left = () => {
-        setArtpiece(a => (a - 1 + ART.length) % ART.length);
-    };
-    const right = useCallback(() => {
-        setArtpiece(a => (a + 1) % ART.length);
-    }, []);
 
     useEffect(() => {
         if (shuffleOn) {
@@ -47,6 +36,40 @@ export default function DisplayArt() {
             return () => { clearInterval(timeout) };
         }
     }, [shuffleOn, right]);
+
+    return <div
+        className="fixed bottom-0 right-0 p-10 underline invisible sm:visible text-right"
+    >
+        <Tooltip title={shuffleOn ? "shuffling - click to pause" : "paused - click to resume shuffling"}>
+            <span onClick={() => setShuffleOn(x => !x)}>
+                {
+                    shuffleOn ? <ReplayIcon /> : <PauseIcon />
+                }
+            </span>
+        </Tooltip>
+        <Tooltip title="previous animation">
+            <ChevronLeftIcon onClick={left} />
+        </Tooltip>
+        <Tooltip title="next animation">
+            <ChevronRightIcon onClick={right} />
+        </Tooltip>
+        <br />
+        {name}
+    </div>;
+}
+
+export default function DisplayArt() {
+    const [artpiece, setArtpiece] = useState(0);
+    const name = useMemo(() => ART[artpiece][1], [artpiece]);
+    const func = useMemo(() => ART[artpiece][0], [artpiece]);
+    const ref = useRef<HTMLCanvasElement>(null);
+
+    const left = useCallback(() => {
+        setArtpiece(a => (a - 1 + ART.length) % ART.length);
+    }, []);
+    const right = useCallback(() => {
+        setArtpiece(a => (a + 1) % ART.length);
+    }, []);
 
     useEffect(() => {
         const from = 30, to = 0;
@@ -66,25 +89,7 @@ export default function DisplayArt() {
             args={{ func, duration }}
             ref={ref}
             className="opacity-30 fixed top-0 left-0 w-screen h-screen z-[-2] invisible sm:visible" />
-        <div
-            className="fixed bottom-0 right-0 p-10 underline invisible sm:visible text-right"
-        >
-            <Tooltip title={shuffleOn ? "shuffling - click to pause" : "paused - click to resume shuffling"}>
-                <span onClick={() => setShuffleOn(x => !x)}>
-                    {
-                        shuffleOn ? <ReplayIcon /> : <PauseIcon />
-                    }
-                </span>
-            </Tooltip>
-            <Tooltip title="previous animation">
-                <ChevronLeftIcon onClick={left} />
-            </Tooltip>
-            <Tooltip title="next animation">
-                <ChevronRightIcon onClick={right} />
-            </Tooltip>
-            <br />
-            {name}
-        </div>
+        <Controls left={left} right={right} name={name} />
     </>
 }
 
