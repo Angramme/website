@@ -1,6 +1,3 @@
-Sitemap: https://ozi.vercel.app/api/sitemap
-Sitemap: https://ozi.vercel.app/api/sitemap-projects
-
 User-agent: Googlebot-Image
 Disallow: /*.jpg
 Disallow: /*.jpeg
