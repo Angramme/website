@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-import { useMemo } from 'react';
 
 
 function Inner({ children, disabled }: Readonly<{ children: React.ReactNode, disabled?: boolean }>) {
