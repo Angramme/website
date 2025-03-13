@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Block from "@/comp/block";
-import mePic from "../../public/me.jpg";
+import mePic from "../../public/me.jpeg";
 import cvPic from "../../public/cv.png";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import Llink from "@/comp/link";
