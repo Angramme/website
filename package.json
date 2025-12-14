@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^6.3.0",
-    "next": "15.1.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.6",
+    "@mui/material": "^7.3.6",
+    "next": "16.0.10",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "simplex-noise": "^4.0.3"
   },
   "devDependencies": {
